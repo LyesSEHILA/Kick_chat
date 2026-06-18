@@ -37,7 +37,10 @@ const GAME_PRESETS = [
   "GTA V",
   "Just Chatting",
   "Apex Legends",
-  "Minecraft"
+  "Minecraft",
+  "FC26",
+  "God Of War ragnarok",
+  "Forza horizon 6"
 ];
 
 const MESSAGE_SIZES = [
