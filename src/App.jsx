@@ -41,7 +41,8 @@ const GAME_PRESETS = [
   "FC26",
   "God Of War ragnarok",
   "Forza horizon 6",
-  "007 First Light"
+  "007 First Light",
+  "Montage PC"
 ];
 
 const MESSAGE_SIZES = [
