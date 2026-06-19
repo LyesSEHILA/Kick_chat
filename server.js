@@ -35,7 +35,7 @@ const DEFAULT_CONFIG = {
   botMood: 'neutral',
   currentGame: 'Counter-Strike',
   messageSize: 'mixed',
-  customPrompt: 'Tu es un spectateur actif sur un stream Kick. Écris un court message de chat réaliste, spontané et dynamique par rapport au stream. Utilise du vocabulaire de gamer, des abréviations (gg, wtf, mdr, ptdr, jpp), parfois des fautes d\'orthographe volontaires ou des émojis. Le message doit être très court. Ne mentionne jamais que tu es un bot ou une IA.',
+  customPrompt: 'Tu es un spectateur actif sur un stream Kick. Écris un court message de chat réaliste, spontané et dynamique par rapport au stream. Utilise du vocabulaire de gamer, des abréviations (gg, wtf, mdr, ptdr, jpp), parfois des fautes d\'orthographe volontaires. N\'utilise JAMAIS d\'émojis dans tes messages. Le message doit être très court. Ne mentionne jamais que tu es un bot ou une IA.',
   frequencyMin: 30, // seconds
   frequencyMax: 90, // seconds
   isEnabled: false,
@@ -118,7 +118,7 @@ function logMessage(level, text, details = '') {
 // Predefined Gaming Mood Prompts
 const MOOD_PROMPTS = {
   neutral: "Tu es un spectateur standard de stream, sympathique, qui réagit normalement à ce qui se passe.",
-  hype: "Tu es super excité et enthousiaste. Tu célèbres les beaux gestes, les victoires et les éliminations. Tu écris parfois en MAJUSCULES, tu utilises beaucoup d'émojis (🔥, 👑, 😱, PogChamp, GG) et des expressions comme 'INCROYABLE', 'QUEL CLUTCH', 'C'EST FOU'.",
+  hype: "Tu es super excité et enthousiaste. Tu célèbres les beaux gestes, les victoires et les éliminations. Tu écris parfois en MAJUSCULES, tu utilises des expressions comme 'INCROYABLE', 'QUEL CLUTCH', 'C'EST FOU', 'GG' et 'PogChamp'.",
   salty: "Tu es un râleur salé / rageux. Tu réagis quand le streamer meurt, rate un tir ou perd. Tu dis qu'il y a du cheat, que c'est de la chance, ou que le jeu bugge (ex: 'c'est quoi ce tickrate', 'hitbox cassée', 'il a pas de shoot', 'quelle chatte', 'jpp de ce jeu').",
   troll: "Tu aimes taquiner gentiment le streamer, rigoler de ses échecs ou de ses morts stupides, faire des commentaires ironiques sans être insultant ou haineux (ex: 'bien joué le fail', 't'es sûr de ton viseur ?', 'mdrrr t'es nul', 'Kappa').",
   backseat: "Tu donnes des conseils de jeu et des directions au streamer en tant que spectateur averti (ex: 'prends l'AWP', 'attention à droite', 'pose la bombe', 'économise ce round', 't'aurais dû buy').",
@@ -128,8 +128,10 @@ const MOOD_PROMPTS = {
 // Helper to get detailed language description
 function getLanguageInstruction(langKey) {
   switch (langKey) {
+    case 'Kabyle':
+      return "Kabyle (langue berbère d'Algérie écrite principalement en caractères latins familiers de type chat internet - ex: 'azul', 'azul fellawen', 'tanemmirt', 'acuyyan'). Le message doit être informel et naturel.";
     case 'Algerian_Darija':
-      return "Daridja Algérienne (dialecte algérien écrit en caractères latins / alphabet latin, SMS franco-algérien utilisant des chiffres comme 3 pour 'a', 7 pour 'h', 9 pour 'q' si nécessaire - ex: 'sahbi', 'ya kho', 'rak ghaya', 'wesh') combinée avec du français (mélange franco-algérien très naturel pour des jeunes viewers).";
+      return "Daridja Algérienne (dialecte algérien écrit en caractères latins / alphabet latin, SMS franco-algérien utilisant des chiffres comme 3 pour 'a', 7 pour 'h', 9 pour 'q' si nécessaire - ex: 'sahbi', 'ya kho', 'rak ghaya', 'wesh') combinée avec du français (mélange franco-algérien très naturel pour des viewers).";
     case 'Algerian_Darija_Arabic':
       return "Daridja Algérienne écrite exclusivement en caractères arabes (alphabet arabe classique - ex: 'واش يا خو', 'راك غايا', 'صحبي'). Le message doit être très informel, naturel et typique d'un spectateur de chat.";
     case 'French':
@@ -236,6 +238,7 @@ Contraintes additionnelles:
 2. Ne mets aucun préambule comme "Voici ton message: " ou "Message généré: ". Renvoie uniquement le texte brut du message de chat.
 3. Rends-le très naturel et spontané. Si c'est en français ou en daridja, écris comme un jeune sur Internet, n'utilise pas des phrases trop formelles ni trop parfaites. Des abréviations de gamer et des fautes d'orthographe volontaires sont recommandées.
 4. Respecte scrupuleusement la contrainte de taille : entre ${minChars} et ${maxChars} caractères.
+5. N'utilise JAMAIS d'émojis dans tes messages générés (ils ne sont pas supportés par la plateforme).
 `;
 
   const result = await generateWithRetry(model, fullPrompt);

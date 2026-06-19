@@ -52,6 +52,7 @@ const MESSAGE_SIZES = [
 
 const LANGUAGE_OPTIONS = [
   { id: 'French', name: 'Français 🇫🇷' },
+  { id: 'Kabyle', name: 'Kabyle ⵣ' },
   { id: 'Algerian_Darija', name: 'Daridja (Latin) 🇩🇿' },
   { id: 'Algerian_Darija_Arabic', name: 'Daridja (Arabe) 🇩🇿' },
   { id: 'English', name: 'Anglais 🇺🇸' },
@@ -68,11 +69,11 @@ function App() {
     aiApiKey: '',
     aiModel: 'gemini-2.5-flash',
     botLanguage: 'French',
-    botLanguages: ['French', 'Algerian_Darija', 'Algerian_Darija_Arabic'],
+    botLanguages: ['French', 'Kabyle', 'Algerian_Darija', 'Algerian_Darija_Arabic'],
     botMood: 'neutral',
     currentGame: 'Counter-Strike',
     messageSize: 'mixed',
-    customPrompt: 'Tu es un spectateur actif sur un stream Kick. Écris un court message de chat réaliste, spontané et dynamique par rapport au stream. Utilise du vocabulaire de gamer, des abréviations (gg, wtf, mdr, ptdr, jpp), parfois des fautes d\'orthographe volontaires ou des émojis. Le message doit être très court. Ne mentionne jamais que tu es un bot ou une IA.',
+    customPrompt: 'Tu es un spectateur actif sur un stream Kick. Écris un court message de chat réaliste, spontané et dynamique par rapport au stream. Utilise du vocabulaire de gamer, des abréviations (gg, wtf, mdr, ptdr, jpp), parfois des fautes d\'orthographe volontaires. N\'utilise JAMAIS d\'émojis dans tes messages. Le message doit être très court. Ne mentionne jamais que tu es un bot ou une IA.',
     supabaseUrl: '',
     supabaseKey: '',
     friends: [],
