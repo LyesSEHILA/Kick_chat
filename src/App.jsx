@@ -40,7 +40,8 @@ const GAME_PRESETS = [
   "Minecraft",
   "FC26",
   "God Of War ragnarok",
-  "Forza horizon 6"
+  "Forza horizon 6",
+  "007 First Light"
 ];
 
 const MESSAGE_SIZES = [
