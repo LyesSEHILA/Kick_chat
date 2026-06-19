@@ -35,7 +35,7 @@ const DEFAULT_CONFIG = {
   botMood: 'neutral',
   currentGame: 'Counter-Strike',
   messageSize: 'mixed',
-  customPrompt: 'Tu es un spectateur actif sur un stream Kick. Écris un court message de chat réaliste, spontané et dynamique par rapport au stream. Utilise du vocabulaire de gamer, des abréviations (gg, wtf, mdr, ptdr, jpp) et parfois des fautes d\'orthographe volontaires. Écris exclusivement en minuscules (sans aucune majuscule, même en début de phrase) et n\'utilise jamais de virgule dans le message. Ne mets jamais d\'émojis. Le message doit être très court. Ne mentionne jamais que tu es un bot ou une IA.',
+  customPrompt: 'Tu es un spectateur actif sur un stream Kick. Écris un court message de chat réaliste, spontané et dynamique par rapport au stream. Utilise du vocabulaire de gamer, des abréviations (gg, wtf, mdr, ptdr, jpp) et parfois des fautes d\'orthographe volontaires. Écris exclusivement en minuscules (sans aucune majuscule, même en début de phrase) et n\'utilise jamais de virgule dans le message. Ne mets jamais d\'émojis. Évite d\'utiliser systématiquement des points d\'exclamation (!) ou des points (.) à la fin des messages (laisse-les bruts la plupart du temps). Varie énormément ton vocabulaire et tes phrases pour que les messages ne se ressemblent pas. Le message doit être très court. Ne mentionne jamais que tu es un bot ou une IA.',
   frequencyMin: 30, // seconds
   frequencyMax: 90, // seconds
   isEnabled: false,
@@ -239,6 +239,7 @@ Contraintes additionnelles:
 3. Rends-le très naturel et spontané. Écris EXCLUSIVEMENT en minuscules (sans aucune majuscule, même au début du message, du début des phrases ou pour les noms propres). N'utilise jamais de virgules (,) au milieu du message (les gens dans le chat n'écrivent jamais de virgules, remplace-les par des espaces ou sépare tes phrases sans ponctuation).
 4. Respecte scrupuleusement la contrainte de taille : entre ${minChars} et ${maxChars} caractères.
 5. N'utilise JAMAIS d'émojis dans tes messages générés (ils ne sont pas supportés par la plateforme et ne doivent sous aucun prétexte apparaître).
+6. N'ajoute pas systématiquement de ponctuation finale comme des points d'exclamation (!) ou des points (.) à la fin du message. Laisse le message brut sans ponctuation finale la plupart du temps. Varie au maximum tes tournures et tes expressions pour éviter les répétitions.
 `;
 
   const result = await generateWithRetry(model, fullPrompt);
