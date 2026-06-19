@@ -628,10 +628,11 @@ function App() {
                       }}
                     >
                       <option value="gemini-2.5-flash">Gemini 2.5 Flash (Recommandé)</option>
+                      <option value="gemini-3.5-flash">Gemini 3.5 Flash (Dernière génération)</option>
                       <option value="gemini-2.0-flash">Gemini 2.0 Flash (Rapide)</option>
-                      <option value="gemini-1.5-flash">Gemini 1.5 Flash (Quota plus élevé)</option>
+                      <option value="gemini-2.5-flash-lite">Gemini 2.5 Flash Lite (Économe)</option>
+                      <option value="gemini-2.0-flash-lite">Gemini 2.0 Flash Lite (Très rapide)</option>
                       <option value="gemini-2.5-pro">Gemini 2.5 Pro (Ultra précis)</option>
-                      <option value="gemini-1.5-pro">Gemini 1.5 Pro</option>
                     </select>
                   </div>
 
