@@ -22,12 +22,12 @@ import './App.css';
 
 // Predefined gaming moods
 const GAMING_MOODS = [
-  { id: 'neutral', name: 'Standard 😐', desc: 'Réagit normalement aux événements.' },
-  { id: 'hype', name: 'Enthousiaste 🔥', desc: 'Célèbre les belles actions, écrit en majuscules.' },
-  { id: 'salty', name: 'Rageux / Salé 🧂', desc: 'Râle après les morts, blame le jeu ou la chance.' },
-  { id: 'troll', name: 'Taquin / Troll 😜', desc: 'Rigole gentiment des fails du streamer.' },
-  { id: 'backseat', name: 'Backseater 🧠', desc: 'Donne des conseils tactiques (AWP, buy, bomb).' },
-  { id: 'analytic', name: 'Analyste 📋', desc: 'Commente la stratégie et l\'économie.' }
+  { id: 'neutral', name: 'Standard', desc: 'Réagit normalement aux événements.' },
+  { id: 'hype', name: 'Enthousiaste', desc: 'Célèbre les belles actions.' },
+  { id: 'salty', name: 'Rageux / Salé', desc: 'Râle après les morts, blame le jeu ou la chance.' },
+  { id: 'troll', name: 'Taquin / Troll', desc: 'Rigole gentiment des échecs du streamer.' },
+  { id: 'backseat', name: 'Backseater', desc: 'Donne des conseils tactiques.' },
+  { id: 'analytic', name: 'Analyste', desc: 'Commente la stratégie.' }
 ];
 
 const GAME_PRESETS = [
@@ -73,7 +73,7 @@ function App() {
     botMood: 'neutral',
     currentGame: 'Counter-Strike',
     messageSize: 'mixed',
-    customPrompt: 'Tu es un spectateur actif sur un stream Kick. Écris un court message de chat réaliste, spontané et dynamique par rapport au stream. Utilise du vocabulaire de gamer, des abréviations (gg, wtf, mdr, ptdr, jpp), parfois des fautes d\'orthographe volontaires. N\'utilise JAMAIS d\'émojis dans tes messages. Le message doit être très court. Ne mentionne jamais que tu es un bot ou une IA.',
+    customPrompt: 'Tu es un spectateur actif sur un stream Kick. Écris un court message de chat réaliste, spontané et dynamique par rapport au stream. Utilise du vocabulaire de gamer, des abréviations (gg, wtf, mdr, ptdr, jpp) et parfois des fautes d\'orthographe volontaires. Écris exclusivement en minuscules (sans aucune majuscule, même en début de phrase) et n\'utilise jamais de virgule dans le message. Ne mets jamais d\'émojis. Le message doit être très court. Ne mentionne jamais que tu es un bot ou une IA.',
     supabaseUrl: '',
     supabaseKey: '',
     friends: [],
