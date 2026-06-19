@@ -152,7 +152,7 @@ function getLanguageInstruction(langKey) {
 }
 
 // Helper to perform Gemini API calls with automatic retries for transient errors (503, 429, etc.)
-async function generateWithRetry(model, prompt, retries = 3, delayMs = 3000) {
+async function generateWithRetry(model, prompt, retries = 5, delayMs = 3000) {
   let attempt = 0;
   while (attempt < retries) {
     try {
@@ -162,8 +162,32 @@ async function generateWithRetry(model, prompt, retries = 3, delayMs = 3000) {
       if (attempt >= retries) {
         throw error;
       }
-      logMessage('warning', `API Gemini temporairement surchargée (erreur ${error.status || '503/429'}). Tentative ${attempt}/${retries} dans ${delayMs/1000}s...`);
-      await new Promise(resolve => setTimeout(resolve, delayMs));
+      
+      const errorMsg = error && error.message ? String(error.message) : String(error || '');
+      const isRateLimit = errorMsg.includes('429') || 
+                          errorMsg.toLowerCase().includes('quota') || 
+                          (error && error.status === 429);
+      
+      let waitTimeMs = delayMs;
+      
+      if (isRateLimit) {
+        // Try parsing "Please retry in X.XXXXs" from the Gemini API error
+        const match = errorMsg.match(/Please retry in ([\d.]+)s/i);
+        if (match) {
+          const waitSec = parseFloat(match[1]);
+          // Add 1.5s buffer to be safe
+          waitTimeMs = Math.ceil((waitSec + 1.5) * 1000);
+          logMessage('warning', `API Gemini a atteint son quota (429). Attente recommandée de ${waitSec}s (+1.5s de marge). Tentative ${attempt}/${retries} dans ${Math.ceil(waitTimeMs/1000)}s...`);
+        } else {
+          // Exponential backoff if duration not found
+          waitTimeMs = delayMs * Math.pow(3, attempt - 1);
+          logMessage('warning', `API Gemini a atteint son quota (429). Tentative ${attempt}/${retries} dans ${waitTimeMs/1000}s avec backoff...`);
+        }
+      } else {
+        logMessage('warning', `Erreur API Gemini temporaire (erreur ${(error && error.status) || 'surcharge'}). Tentative ${attempt}/${retries} dans ${delayMs/1000}s...`);
+      }
+      
+      await new Promise(resolve => setTimeout(resolve, waitTimeMs));
     }
   }
 }
